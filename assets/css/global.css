@@ -1,0 +1,443 @@
+
+/* ==========================================
+   UNSTABLE REUNION — GLOBAL DESIGN SYSTEM
+   Version: 1.0
+   ========================================== */
+
+
+/* 1. DESIGN TOKENS */
+
+:root {
+    color-scheme: dark;
+
+    --color-bg: #090912;
+    --color-bg-secondary: #101020;
+    --color-surface: #17172b;
+    --color-surface-hover: #22223b;
+
+    --color-text: #f2f2ff;
+    --color-text-muted: #aaaac5;
+
+    --color-primary: #a855f7;
+    --color-secondary: #00e5ff;
+    --color-accent: #ff3cac;
+
+    --color-border: rgba(168, 85, 247, 0.28);
+
+    --gradient-main:
+        linear-gradient(135deg, #a855f7, #00e5ff);
+
+    --gradient-chaos:
+        linear-gradient(120deg, #ff3cac, #784ba0, #2b86c5);
+
+    --shadow-glow:
+        0 0 24px rgba(168, 85, 247, 0.18);
+
+    --font-main:
+        system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+
+    --font-heading:
+        system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+
+    --content-width: 1200px;
+
+    --radius-small: 8px;
+    --radius-medium: 16px;
+    --radius-large: 24px;
+
+    --transition-fast: 180ms ease;
+    --transition-normal: 300ms ease;
+}
+
+
+/* 2. RESET */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+
+    background:
+        radial-gradient(
+            ellipse at 15% 0%,
+            rgba(168, 85, 247, 0.10),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 90% 25%,
+            rgba(0, 229, 255, 0.07),
+            transparent 40%
+        ),
+        var(--color-bg);
+
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.7;
+    overflow-wrap: break-word;
+}
+
+
+/* 3. TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    letter-spacing: -0.045em;
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.025em;
+}
+
+h3 {
+    font-size: 1.35rem;
+}
+
+p {
+    margin-top: 0;
+}
+
+p,
+li {
+    color: var(--color-text-muted);
+}
+
+strong {
+    color: var(--color-text);
+}
+
+
+/* 4. LINKS */
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition:
+        color var(--transition-fast),
+        opacity var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 4px;
+}
+
+
+/* 5. MEDIA */
+
+img,
+video,
+svg {
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+
+/* 6. SHARED LAYOUT */
+
+.container {
+    width: min(
+        calc(100% - 40px),
+        var(--content-width)
+    );
+
+    margin-inline: auto;
+}
+
+section {
+    position: relative;
+    padding: 80px 0;
+}
+
+section > h2,
+section > .section-heading {
+    margin-bottom: 32px;
+}
+
+.section-heading {
+    text-align: center;
+}
+
+.section-description {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    text-align: center;
+}
+
+
+/* 7. GLOBAL HEADER AND NAVIGATION */
+
+#site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(9, 9, 18, 0.86);
+    border-bottom: 1px solid var(--color-border);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+#main-navigation {
+    width: min(
+        calc(100% - 40px),
+        1440px
+    );
+
+    min-height: 76px;
+    margin-inline: auto;
+    padding: 16px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.site-logo {
+    flex-shrink: 0;
+
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.site-logo:hover {
+    color: var(--color-secondary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    display: inline-block;
+    padding: 6px 0;
+
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+    color: var(--color-secondary);
+}
+
+
+/* 8. SHARED BUTTONS */
+
+.button,
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-small);
+
+    background: var(--gradient-main);
+    color: #090912;
+
+    font: inherit;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        filter var(--transition-fast);
+}
+
+.button:hover,
+button:hover {
+    color: #090912;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    filter: brightness(1.12);
+}
+
+.button-secondary {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.button-secondary:hover {
+    color: var(--color-secondary);
+}
+
+
+/* 9. SHARED CARDS */
+
+.card {
+    padding: 24px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background: var(--color-surface);
+
+    transition:
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-glow);
+}
+
+
+/* 10. GLOBAL FOOTER */
+
+#site-footer {
+    padding: 40px 20px;
+
+    border-top: 1px solid var(--color-border);
+    background: rgba(5, 5, 12, 0.75);
+
+    text-align: center;
+}
+
+#site-footer p {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+#site-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+}
+
+#site-footer nav a {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+#site-footer nav a:hover {
+    color: var(--color-secondary);
+}
+
+
+/* 11. SELECTION AND SCROLLBAR */
+
+::selection {
+    background: var(--color-primary);
+    color: white;
+}
+
+:focus-visible {
+    scroll-margin-block: 100px;
+}
+
+
+/* 12. REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* 13. RESPONSIVE FOUNDATION */
+
+@media (max-width: 900px) {
+    #main-navigation {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 56px 0;
+    }
+
+    .container {
+        width: min(
+            calc(100% - 28px),
+            var(--content-width)
+        );
+    }
+
+    #main-navigation {
+        width: calc(100% - 28px);
+    }
+
+    .nav-links {
+        gap: 4px 14px;
+    }
+
+    .nav-links a {
+        font-size: 0.82rem;
+    }
+}
